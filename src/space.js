@@ -3,7 +3,7 @@ module.exports = class Space {
    * Constructs the space.
    */
   constructor() {
-    this.stars = this.planets = Infinity;
+    this.starCount = this.planetCount = Infinity;
     this.mainPlanet = 'Earth';
     this.mainSolarSystem = {};
     this.large = true;
