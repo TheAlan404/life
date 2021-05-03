@@ -23,7 +23,7 @@ module.exports = class Space {
    */
   explore() {
     isDestroyed();
-    return (Math.random() + .5) >= 1 ? (this.exploreState++, true) : false;
+    return (Math.random() + .5) >= 1 ? (this.exploreState.timesExplored++, true) : false;
   }
 
   /**
