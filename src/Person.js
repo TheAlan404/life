@@ -72,6 +72,14 @@ module.exports = class Person extends EventEmitter {
             this.boredom -= 3;
         }, 30000);
     }
+    
+    /**
+    * Makes the person have sex with another person
+    * @param {Person} otherPerson
+    */
+    haveSexWith(otherPerson) {
+        // TODO: implement genitilia checks or this isnt gonna respect transgender people and such ._. -den
+    }
 };
 
 
@@ -83,4 +91,8 @@ function isFemale(gender) {
 function isMale(gender) {
     if (gender === "masc" || gender === "male" || gender === "masculine" || gender === "m" || gender === "man") return true;
     return false;
+}
+
+function isIntersex(gender) { // does this count as non-binary too? -den
+    return !isMale(gender) && !isFemale(gender);
 }
