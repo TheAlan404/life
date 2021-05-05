@@ -1,8 +1,17 @@
 const EventEmitter = require('events').EventEmitter;
+
+/**
+* A Person's Name
+* @typedef {Object} PersonName
+* @property {String} first
+* @property {String} [middle]
+* @property {String} last
+*/
+
 module.exports = class Person extends EventEmitter {
     /**
      * Creates a new person
-     * @param {Object} name 
+     * @param {(PersonName|Object|String)} name 
      * @param {Number} age 
      * @param {Date} birthday 
      * @param {String} gender 
@@ -10,6 +19,11 @@ module.exports = class Person extends EventEmitter {
      */
     constructor(name, age, birthday, gender) {
         super();
+        if(typeof name == "string") name = {
+          first: name.split(" ")[0],
+          middle: name.split(" ").length >= 3 ? name.split(" ").shift().pop().join(" ") : null,
+          last: name.split(" ")[name.split(" ").length - 1],
+        };
         this.name = name;
         this.age = age;
         this.birthday = birthday;
