@@ -8,28 +8,50 @@ const EventEmitter = require('events').EventEmitter;
 * @property {String} last
 */
 
+/**
+* Data for creating the person
+* @typedef {object} PersonOptions
+* @property {(PersonName|Object|String)} name 
+* @property {Date} birthday 
+* @property {Gender} gender
+* @property {Sex} sex - the person's AGAB, defaults to property gender
+*/
+
+/**
+* @typedef {("male"|"female"|"nonbinary")} Gender
+*/
+
+// TODO: include intersex in Sex
+
+/**
+* @typedef {("male"|"female")} Sex
+*/
+
+
 module.exports = class Person extends EventEmitter {
     /**
      * Creates a new person
-     * @param {(PersonName|Object|String)} name 
-     * @param {Number} age 
-     * @param {Date} birthday 
-     * @param {String} gender 
-     * @example new Person({first: 'First', middle: 'Middle', last: 'Last'}, 16, new Date(2005,1,1))
+     * @param {PersonOptions}
+     * @example new Person({
+                    name: {
+                        first: 'First',
+                        middle: 'Middle',
+                        last: 'Last'
+                    }, 
+                    birthday: new Date(2005,1,1),
+                });
+     * @example new Person({ name: "Mike Morasky" });
      */
-    constructor(name, age, birthday, gender) {
+    constructor(data = {}) {
         super();
-        if(typeof name == "string") name = {
-          first: name.split(" ")[0],
-          middle: name.split(" ").length >= 3 ? name.split(" ").shift().pop().join(" ") : null,
-          last: name.split(" ")[name.split(" ").length - 1],
-        };
-        this.name = name;
-        this.age = age;
-        this.birthday = birthday;
-        this.gender = gender;
+        
+        this.name = Person.parseName(data.name);
+        this.birthday = data.birthday;
+        this.gender = data.gender || 0.5 > Math.random() ? "female" : "male" ;
+        this.sex = data.sex || 0.05 < Math.random() ? this.gender : Person.revertGender(this.gender);
 
-
+        if(this.sex == "nonbinary") throw new Error("Non-binary is a gender; not a sex, please specify the person's sex");
+        
         this.currentaction = "Nothing";
         this.boredom = 0;
         this.horniness = 0;
@@ -45,6 +67,22 @@ module.exports = class Person extends EventEmitter {
 
 
         setInterval(() => this._loop, 60000);
+    }
+    
+    /**
+    * The person's age
+    * @property {number} age
+    */
+    get age() {
+        return new Date(Date.now() - this.birthday).getFullYear();
+    }
+    
+    /**
+    * Checks if the person is transgender
+    * @property {boolean} isTransgender
+    */
+    get isTransgender() {
+        return this.sex !== this.gender;
     }
 
     _loop() {
@@ -80,6 +118,45 @@ module.exports = class Person extends EventEmitter {
     haveSexWith(otherPerson) {
         // TODO: implement genitilia checks or this isnt gonna respect transgender people and such ._. -den
     }
+    
+    
+    
+    
+    /**
+    * Parses PersonName
+    * @param {(PersonName|string|object)}
+    */
+    static parseName(name) {
+        if(!name) return Person.generateName();
+        if(typeof name == "object") {
+            if(!name.first && !name.last) return Person.generateName();
+            return name;
+        }
+        if(typeof name == "string") return {
+          first: name.split(" ")[0],
+          middle: name.split(" ").length >= 3 ? name.split(" ").shift().pop().join(" ") : null,
+          last: name.split(" ")[name.split(" ").length - 1],
+        };
+    }
+    
+    /**
+    * Reverses the given gender / genderbends
+    * @param {Gender} gender
+    * @returns {Gender} reversed gender
+    */
+    static reverseGender(gender) {
+        if(gender == "male") return "female";
+        if(gender == "female") return "male";
+        return "nonbinary";
+    }
+    
+    /**
+    * Generates 
+    */
+    static generateName() {
+        // TODO
+    }
+    
 };
 
 
