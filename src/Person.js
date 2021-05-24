@@ -66,7 +66,7 @@ module.exports = class Person extends EventEmitter {
 
 
 
-        setInterval(() => this._loop, 60000);
+        this._loopInterval = setInterval(() => this._loop.bind(this)(), 60000);
     }
     
     /**
