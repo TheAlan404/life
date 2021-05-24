@@ -1,0 +1,46 @@
+{
+    "dennis": {
+        "name": {
+            "first": "dennis",
+            "last": "null"
+        },
+        "gender": "female",
+		"sex": "male",
+        "bots": [
+            "akiyama"
+        ]
+    },
+    "null": {
+        "isGoodDev": true,
+        "bots": [
+            "username601"
+        ],
+		"gender": "male"
+    },
+    "reis": {
+        "isGoodDev": true,
+        "bots": [
+            "foxbot",
+            "antitoxicity"
+        ],
+		"gender": "male"
+    },
+    "voltrex": {
+        "isGoodDev": true,
+        "bots": [
+            "vxcomplexity"
+        ],
+		"gender": "male"
+    },
+    "nom": {
+        "isTwig": true,
+        "isCool": true,
+        "worksAt": "top.gg",
+		"gender": "female"
+    },
+    "veld": {
+        "isGoodDev": true,
+        "worksAt": "top.gg",
+		"gender": "male"
+    }
+}
