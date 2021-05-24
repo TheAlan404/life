@@ -48,7 +48,7 @@ module.exports = class Person extends EventEmitter {
         this.name = Person.parseName(data.name);
         this.birthday = data.birthday;
         this.gender = data.gender || 0.5 > Math.random() ? "female" : "male" ;
-        this.sex = data.sex || 0.05 < Math.random() ? this.gender : Person.revertGender(this.gender);
+        this.sex = data.sex || 0.05 < Math.random() ? this.gender : Person.reverseGender(this.gender);
 
         if(this.sex == "nonbinary") throw new Error("Non-binary is a gender; not a sex, please specify the person's sex");
         
@@ -57,7 +57,7 @@ module.exports = class Person extends EventEmitter {
         this.horniness = 0;
         this.masturbating = false;
         this.canmasturbate = true;
-        if (isFemale(gender)) {
+        if (isFemale(this.sex)) {
             this.pregnancy = {
                 timeLeft: 0,
                 pregnant: false,
