@@ -51,7 +51,7 @@ module.exports = class Person extends EventEmitter {
     this.gender = data.gender || (0.5 > Math.random() ? 'female' : 'male');
     this.sex = data.sex || (0.5 < Math.random() ? this.gender : Person.reverseGender(this.gender));
     
-    if (this.sex === 'nonbinary') throw new Error("Non-binary is a gender; not a sex, please specify the person's sex");
+    if(!isFemale(this.sex) && !isMale(this.sex) && !isIntersex(this.sex)) throw new Error("Non-binary is a gender; not a sex, please specify the person's sex");
     
     this.currentAction = 'Nothing';
     this.boredom = 0;
@@ -198,10 +198,17 @@ function isMale(gender) {
 }
 
 /**
- * @param {string} gender
+ * @param {string} sex
  * @returns {boolean}
  */
-function isIntersex(gender) {
-  // does this count as non-binary too? -den
-  return !isMale(gender) && !isFemale(gender);
+function isIntersex(sex) {
+  switch (sex) {
+    case 'intersex':
+    case 'both':
+    case 'all':
+    case 'multiple':
+    case 'inter':
+      return true;
+    default: return false;
+  }
 }
