@@ -17,6 +17,7 @@ class PersonCollection {
 	* @returns {null|Person}
 	*/
 	get(id) {
+		if(typeof id !== "string") id = id + "";
 		if(!this.collection.has(id)) return null;
 		let value = this.collection.get(id);
 		return (value instanceof Person ? value : new Person(value));
