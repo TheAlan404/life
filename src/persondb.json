@@ -17,14 +17,6 @@
         ],
 		"gender": "male"
     },
-    "reis": {
-        "isGoodDev": true,
-        "bots": [
-            "foxbot",
-            "antitoxicity"
-        ],
-		"gender": "male"
-    },
     "voltrex": {
         "isGoodDev": true,
         "bots": [
