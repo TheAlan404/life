@@ -1,6 +1,6 @@
 {
   "name": "life-sim",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "An npm package dedicated to simulate life (joke package)",
   "main": "index.js",
   "scripts": {
