@@ -5,7 +5,7 @@
             "last": "null"
         },
         "gender": "female",
-		"sex": "male",
+	"sex": "male",
         "bots": [
             "akiyama"
         ]
@@ -15,24 +15,26 @@
         "bots": [
             "username601"
         ],
-		"gender": "male"
+	"gender": "male"
     },
     "voltrex": {
         "isGoodDev": true,
         "bots": [
             "vxcomplexity"
         ],
-		"gender": "male"
+	"gender": "male"
     },
     "nom": {
         "isTwig": true,
         "isCool": true,
         "worksAt": "top.gg",
-		"gender": "female"
+	"gender": "female",
+	"short": true,
+	"qt": true
     },
     "veld": {
         "isGoodDev": true,
         "worksAt": "top.gg",
-		"gender": "male"
+	"gender": "male"
     }
 }
